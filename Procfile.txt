@@ -1,1 +1,1 @@
-java -cp "target/dependency/*":target/classes SendEmailUsingSMTP
+java -cp "src/main/java/ciber/googleAPI/*":src/main/java/ciber/googleAPI/classes SendEmailUsingSMTP
