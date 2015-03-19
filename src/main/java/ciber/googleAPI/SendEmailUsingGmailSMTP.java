@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
-import spark.Route;
 
 import java.util.ArrayList;
 import java.util.Properties;
@@ -30,7 +29,7 @@ public class SendEmailUsingGmailSMTP {
         logger.info("Starting Mail API");
         try {
             port(Integer.parseInt(System.getenv("PORT")));
-            get("/hello", (req, res) -> "<form>Hello World</form>");
+            get("/hello", SendEmailUsingGmailSMTP::handleGet);
             post("/hello", (req, res) -> "Mail sent");
         } catch (NumberFormatException e) {
             logger.warn("Exception under startup:", e);
@@ -38,10 +37,15 @@ public class SendEmailUsingGmailSMTP {
         logger.info("Finished starting Mail API");
     }
 
-    private static void sendMail(Mail mail) {
+    private static String handleGet(Request request, Response response) {
+        sendMail();
+        return "<form>Hello World</form>";
+    }
+
+    private static void sendMail() {
         // Recipient's email ID needs to be mentioned.
         String to = "mathias.moen@ciber.com";//change accordingly
-        String tre = "oyvind.bjerke@ciber.com";
+        String tre = "andywit88@gmail.com";
         ArrayList<String> emailList = new ArrayList<>();
         emailList.add(to);
         emailList.add(tre);
@@ -81,11 +85,10 @@ public class SendEmailUsingGmailSMTP {
                         InternetAddress.parse(emailList.get(i)));
             }
             // Set Subject: header field
-            message.setSubject("Dine interesser");
+            message.setSubject("AndreasIsNotImpressed");
 
             // Now set the actual message
-            message.setText("Hello, this is sample for to check send "
-                    + "email using JavaMailAPI ");
+            message.setText("DO you want to play a game andreas???");
 
             // Send message
             Transport.send(message);
