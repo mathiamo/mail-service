@@ -39,7 +39,7 @@ public class SendEmailUsingGmailSMTP {
 
     private static String handleGet(Request request, Response response) {
         sendMail();
-        return "<form>Hello World</form>";
+        return "<form>Sjekk gmailen din</form>";
     }
 
     private static void sendMail() {
@@ -87,7 +87,7 @@ public class SendEmailUsingGmailSMTP {
             message.setSubject("Mathias kommer hjem i 7 tida");
 
             // Now set the actual message
-            message.setText("Ka blir det til mat når i kommer hjem i kveld??");
+            message.setText("Ka blir det til mat naar i kommer hjem i kveld??");
 
             // Send message
             Transport.send(message);
