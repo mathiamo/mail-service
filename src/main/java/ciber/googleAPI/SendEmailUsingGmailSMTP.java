@@ -26,9 +26,10 @@ public class SendEmailUsingGmailSMTP {
 
     public static void main(String[] args) {
         logger.info("Starting Mail API");
-        before((request, response) -> response.type("application/json"));
+
         try {
             port(Integer.parseInt(System.getenv("PORT")));
+            before((request, response) -> response.type("application/json"));
             get("/", (request, response) -> "hello world", new JsonTransformer());
             post("/sendMail", (request, response) -> new Mail(request.queryParams("subject"),request.queryParams("body")), new JsonTransformer());
         } catch (NumberFormatException e) {
