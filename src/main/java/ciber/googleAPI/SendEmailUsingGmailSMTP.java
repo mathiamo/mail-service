@@ -4,6 +4,7 @@ package ciber.googleAPI;
  * Created by matmoe on 18.03.2015.
  */
 
+import com.google.api.client.json.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
@@ -29,8 +30,8 @@ public class SendEmailUsingGmailSMTP {
         logger.info("Starting Mail API");
         try {
             port(Integer.parseInt(System.getenv("PORT")));
-            get("/hello", SendEmailUsingGmailSMTP::handleGet);
-            post("/hello", (req, res) -> "Mail sent");
+            get("/", SendEmailUsingGmailSMTP::handleGet);
+            post("/sendMail", SendEmailUsingGmailSMTP::handlePost);
         } catch (NumberFormatException e) {
             logger.warn("Exception under startup:", e);
         }
@@ -38,8 +39,11 @@ public class SendEmailUsingGmailSMTP {
     }
 
     private static String handleGet(Request request, Response response) {
-        sendMail();
-        return "<form>Sjekk gmailen din</form>";
+        return "It's alive";
+    }
+    private static String handlePost(Request request, Response response) {
+        //ITS JSON
+        return "lol";
     }
 
     private static void sendMail() {
