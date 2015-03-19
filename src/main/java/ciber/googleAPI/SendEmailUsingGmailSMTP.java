@@ -4,15 +4,12 @@ package ciber.googleAPI;
  * Created by matmoe on 18.03.2015.
  */
 
-import com.google.api.client.json.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
-
 import java.util.ArrayList;
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -21,6 +18,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+
 import static spark.Spark.*;
 
 public class SendEmailUsingGmailSMTP {
@@ -28,10 +26,11 @@ public class SendEmailUsingGmailSMTP {
 
     public static void main(String[] args) {
         logger.info("Starting Mail API");
+        before((request, response) -> response.type("application/json"));
         try {
             port(Integer.parseInt(System.getenv("PORT")));
             get("/", SendEmailUsingGmailSMTP::handleGet);
-            post("/sendMail", SendEmailUsingGmailSMTP::handlePost);
+            post("/sendMail",SendEmailUsingGmailSMTP::handlePost, new JsonTransformer());;
         } catch (NumberFormatException e) {
             logger.warn("Exception under startup:", e);
         }
@@ -42,8 +41,7 @@ public class SendEmailUsingGmailSMTP {
         return "It's alive";
     }
     private static String handlePost(Request request, Response response) {
-        //ITS JSON
-        return "lol";
+        return String.valueOf(new Mail(request.queryParams("subject"),request.queryParams("body")));
     }
 
     private static void sendMail() {
@@ -88,10 +86,10 @@ public class SendEmailUsingGmailSMTP {
                         InternetAddress.parse(s));
             }
             // Set Subject: header field
-            message.setSubject("Mathias kommer hjem i 7 tida");
+            message.setSubject("Dette er dine interesser");
 
             // Now set the actual message
-            message.setText("Ka blir det til mat naar i kommer hjem i kveld??");
+            message.setText("lorem ipsum");
 
             // Send message
             Transport.send(message);
