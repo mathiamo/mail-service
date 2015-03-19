@@ -29,21 +29,12 @@ public class SendEmailUsingGmailSMTP {
         before((request, response) -> response.type("application/json"));
         try {
             port(Integer.parseInt(System.getenv("PORT")));
-            get("/", SendEmailUsingGmailSMTP::handleGet);
-            post("/sendMail",SendEmailUsingGmailSMTP::handlePost, new JsonTransformer());
+            get("/", (request, response) -> "hello world", new JsonTransformer());
+            post("/sendMail", (request, response) -> new Mail(request.queryParams("subject"),request.queryParams("body")), new JsonTransformer());
         } catch (NumberFormatException e) {
             logger.warn("Exception under startup:", e);
         }
         logger.info("Finished starting Mail API");
-    }
-
-    private static String handleGet(Request request, Response response) {
-        return "It's alive";
-    }
-    private static String handlePost(Request request, Response response) {
-        new Mail(request.queryParams("subject"),request.queryParams("body"));
-
-        return "goodie";
     }
 
     private static void sendMail() {
