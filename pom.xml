@@ -60,7 +60,7 @@
                         <assembleDirectory>target</assembleDirectory>
                         <programs>
                             <program>
-                                <mainClass>SendEmailUsingSMTP</mainClass>
+                                <mainClass>ciber.googleAPI.SendEmailUsingGmailSMTP</mainClass>
                                 <name>worker</name>
                             </program>
                         </programs>
