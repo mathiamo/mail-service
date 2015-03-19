@@ -23,12 +23,7 @@ public class SendEmailUsingGmailSMTP {
         final String body = null;
             get("/hello", (req, res) -> "<form>Hello World</form>");
             post("/hello", (req, res) -> "Mail sent");
-            post("/send","application/json", (req, res) -> {
-                Mail mail = new Mail(subject, body);
-                sendMail(mail);
-                res.status(200);
-                return res;
-            });
+
     }
 
     private static void sendMail(Mail mail) {
