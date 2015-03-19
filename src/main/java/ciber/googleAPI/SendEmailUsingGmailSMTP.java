@@ -30,7 +30,7 @@ public class SendEmailUsingGmailSMTP {
         try {
             port(Integer.parseInt(System.getenv("PORT")));
             get("/", SendEmailUsingGmailSMTP::handleGet);
-            post("/sendMail",SendEmailUsingGmailSMTP::handlePost, new JsonTransformer());;
+            post("/sendMail",SendEmailUsingGmailSMTP::handlePost, new JsonTransformer());
         } catch (NumberFormatException e) {
             logger.warn("Exception under startup:", e);
         }
@@ -41,7 +41,9 @@ public class SendEmailUsingGmailSMTP {
         return "It's alive";
     }
     private static String handlePost(Request request, Response response) {
-        return String.valueOf(new Mail(request.queryParams("subject"),request.queryParams("body")));
+        new Mail(request.queryParams("subject"),request.queryParams("body"));
+
+        return "goodie";
     }
 
     private static void sendMail() {
