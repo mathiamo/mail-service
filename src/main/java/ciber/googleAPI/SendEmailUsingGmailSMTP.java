@@ -45,7 +45,7 @@ public class SendEmailUsingGmailSMTP {
     private static void sendMail() {
         // Recipient's email ID needs to be mentioned.
         String to = "mathias.moen@ciber.com";//change accordingly
-        String tre = "andywit88@gmail.com";
+        String tre = "andreaswitzoe@gmail.com";
         ArrayList<String> emailList = new ArrayList<>();
         emailList.add(to);
         emailList.add(tre);
