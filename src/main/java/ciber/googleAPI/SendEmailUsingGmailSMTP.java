@@ -19,8 +19,7 @@ import static spark.Spark.*;
 
 public class SendEmailUsingGmailSMTP {
     public static void main(String[] args) {
-        final String subject = null;
-        final String body = null;
+
             get("/hello", (req, res) -> "<form>Hello World</form>");
             post("/hello", (req, res) -> "Mail sent");
 

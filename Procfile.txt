@@ -1,2 +1,0 @@
-worker: sh target/classes/ciber/googleAPI
-web:    java -cp target/dependency/*:target/classes SendEmailUsingGmailSMTP
