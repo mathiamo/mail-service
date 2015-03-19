@@ -45,10 +45,9 @@ public class SendEmailUsingGmailSMTP {
     private static void sendMail() {
         // Recipient's email ID needs to be mentioned.
         String to = "mathias.moen@ciber.com";//change accordingly
-        String tre = "andreaswitzoe@gmail.com";
+
         ArrayList<String> emailList = new ArrayList<>();
         emailList.add(to);
-        emailList.add(tre);
         // Sender's email ID needs to be mentioned
         String from = "Asdf@asdf.com";//change accordingly
         final String username = "ciberjavadevelopment@gmail.com";//change accordingly
@@ -80,9 +79,9 @@ public class SendEmailUsingGmailSMTP {
             message.setFrom(new InternetAddress(from));
 
             // Set To: header field of the header.
-            for (int i = 0; i < emailList.size(); i++) {
+            for (String s : emailList) {
                 message.setRecipients(Message.RecipientType.TO,
-                        InternetAddress.parse(emailList.get(i)));
+                        InternetAddress.parse(s));
             }
             // Set Subject: header field
             message.setSubject("AndreasIsNotImpressed");
