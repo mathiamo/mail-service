@@ -84,10 +84,10 @@ public class SendEmailUsingGmailSMTP {
                         InternetAddress.parse(s));
             }
             // Set Subject: header field
-            message.setSubject("AndreasIsNotImpressed");
+            message.setSubject("Mathias kommer hjem i 7 tida");
 
             // Now set the actual message
-            message.setText("DO you want to play a game andreas???");
+            message.setText("Ka blir det til mat når i kommer hjem i kveld??");
 
             // Send message
             Transport.send(message);
