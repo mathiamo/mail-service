@@ -1,4 +1,4 @@
-package ciber.googleAPI;
+package ciber.mailService;
 
 import java.util.ArrayList;
 

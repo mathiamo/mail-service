@@ -1,4 +1,4 @@
-package ciber.googleAPI;
+package ciber.mailService;
 
 /**
  * Created by matmoe on 18.03.2015.
