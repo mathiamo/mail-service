@@ -77,7 +77,7 @@ public class SendEmailUsingGmailSMTP {
                 message.setRecipients(Message.RecipientType.TO,
                         InternetAddress.parse(s));
             }
-            Mail mail = new Mail();
+            Mail mail = null;
             // Set Subject: header field
             message.setSubject(mail.getSubject());
 
