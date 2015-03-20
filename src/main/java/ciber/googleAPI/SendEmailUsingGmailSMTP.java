@@ -4,8 +4,12 @@ package ciber.googleAPI;
  * Created by matmoe on 18.03.2015.
  */
 
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import spark.Request;
+import spark.Response;
+
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.mail.Message;
@@ -28,26 +32,33 @@ public class SendEmailUsingGmailSMTP {
         try {
             port(Integer.parseInt(System.getenv("PORT")));
             before((request, response) -> response.type("application/json"));
-            get("/", (request, response) -> "hello world", new JsonTransformer());
-            post("/sendMail", (request, response) -> new Mail(request.queryParams("subject"), request.queryParams("body")), new JsonTransformer());
+            get("/", (request, response) -> "hello world");
+            post("/sendMail", (Request request, Response response) -> {
+                String body = request.body();
+                Mail mail = getMailObjectFromResponse(body);
+                sendMail(mail);
+                return "Mail sent!";
+            });
+
         } catch (NumberFormatException e) {
             logger.warn("Exception under startup:", e);
         }
         logger.info("Finished starting Mail API");
     }
 
-    private static void sendMail() {
-        // Recipient's email ID needs to be mentioned.
+    private static  Mail getMailObjectFromResponse(String json ){
+        return new Gson().fromJson(json, Mail.class);
+    }
+
+    private static void sendMail(Mail mail) {
         String to = "mathiamo@gmail.com";//change accordingly
 
         ArrayList<String> emailList = new ArrayList<>();
         emailList.add(to);
-        // Sender's email ID needs to be mentioned
         String from = "Asdf@asdf.com";//change accordingly
         final String username = "ciberjavadevelopment@gmail.com";//change accordingly
         final String password = "development123";//change accordingly
 
-        // Assuming you are sending email through relay.jangosmtp.net
         String host = "smtp.gmail.com";
 
         Properties props = new Properties();
@@ -66,25 +77,16 @@ public class SendEmailUsingGmailSMTP {
                 });
 
         try {
-            // Create a default MimeMessage object.
             Message message = new MimeMessage(session);
-
-            // Set From: header field of the header.
             message.setFrom(new InternetAddress(from));
 
-            // Set To: header field of the header.
             for (String s : emailList) {
-                message.setRecipients(Message.RecipientType.TO,
-                        InternetAddress.parse(s));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(s));
             }
-            Mail mail = null;
-            // Set Subject: header field
-            message.setSubject(mail.getSubject());
 
-            // Now set the actual message
+            message.setSubject(mail.getSubject());
             message.setText(mail.getBody());
 
-            // Send message
             Transport.send(message);
 
             System.out.println("Sent message successfully....");
