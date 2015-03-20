@@ -6,8 +6,6 @@ package ciber.googleAPI;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import spark.Request;
-import spark.Response;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.mail.Message;
@@ -31,7 +29,7 @@ public class SendEmailUsingGmailSMTP {
             port(Integer.parseInt(System.getenv("PORT")));
             before((request, response) -> response.type("application/json"));
             get("/", (request, response) -> "hello world", new JsonTransformer());
-            post("/sendMail", (request, response) -> new Mail(request.queryParams("subject"),request.queryParams("body")), new JsonTransformer());
+            post("/sendMail", (request, response) -> new Mail(request.queryParams("subject"), request.queryParams("body")), new JsonTransformer());
         } catch (NumberFormatException e) {
             logger.warn("Exception under startup:", e);
         }
@@ -79,11 +77,12 @@ public class SendEmailUsingGmailSMTP {
                 message.setRecipients(Message.RecipientType.TO,
                         InternetAddress.parse(s));
             }
+            Mail mail = new Mail();
             // Set Subject: header field
-            message.setSubject("Dette er dine interesser");
+            message.setSubject(mail.getSubject());
 
             // Now set the actual message
-            message.setText("lorem ipsum");
+            message.setText(mail.getBody());
 
             // Send message
             Transport.send(message);
