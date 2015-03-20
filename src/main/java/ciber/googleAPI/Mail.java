@@ -9,20 +9,20 @@ public class Mail {
 
     String subject;
     String body;
-    String receiver;
+    ArrayList<String> receivers = new ArrayList<>();
 
-    public Mail(String subject, String body, String receiver) {
+    public Mail(String subject, String body, ArrayList<String>receivers) {
         this.body=body;
         this.subject=subject;
-        this.receiver=receiver;
+        this.receivers=receivers;
     }
 
     public String getSubject() {
         return subject;
     }
 
-    public String getReceiver() {
-        return receiver;
+    public ArrayList<String> getReceivers() {
+        return receivers;
     }
 
     public void setSubject(String subject) {

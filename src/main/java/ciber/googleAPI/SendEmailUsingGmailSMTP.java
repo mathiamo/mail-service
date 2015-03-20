@@ -52,9 +52,11 @@ public class SendEmailUsingGmailSMTP {
 
     private static void sendMail(Mail mail) {
         //TODO: add list of users based on interests
-        String to = "mathiamo@gmail.com";//change accordingly
+
         ArrayList<String> emailList = new ArrayList<>();
-        emailList.add(mail.getReceiver());
+
+
+
         String from = "Asdf@asdf.com";//change accordingly
         final String username = "ciberjavadevelopment@gmail.com";//change accordingly
         final String password = "development123";//change accordingly
@@ -80,7 +82,11 @@ public class SendEmailUsingGmailSMTP {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
 
+            for (String s : mail.getReceivers()) {
+                emailList.add(s);
+            }
             for (String s : emailList) {
+
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(s));
             }
 
