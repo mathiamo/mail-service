@@ -9,8 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
-
-import java.util.ArrayList;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -53,13 +51,6 @@ public class SendEmailUsingGmailSMTP {
     private static void sendMail(Mail mail) {
         //TODO: add list of users based on interests
 
-
-        ArrayList<String> emailList = new ArrayList<>();
-        for (String s : mail.getReceivers()) {
-            emailList.add(s);
-        }
-
-
         String from = "Asdf@asdf.com";//change accordingly
         final String username = "ciberjavadevelopment@gmail.com";//change accordingly
         final String password = "development123";//change accordingly
@@ -85,18 +76,14 @@ public class SendEmailUsingGmailSMTP {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
 
-            for (String s : emailList) {
+            for (String s : mail.getReceivers()) {
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(s));
-
-
                 message.setSubject(mail.getSubject());
                 message.setText(mail.getBody());
 
                 Transport.send(message);
                 System.out.println("Sent message successfully....");
             }
-
-
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
