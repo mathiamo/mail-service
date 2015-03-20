@@ -87,14 +87,15 @@ public class SendEmailUsingGmailSMTP {
 
             for (String s : emailList) {
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(s));
+
+
+                message.setSubject(mail.getSubject());
+                message.setText(mail.getBody());
+
+                Transport.send(message);
+                System.out.println("Sent message successfully....");
             }
 
-            message.setSubject(mail.getSubject());
-            message.setText(mail.getBody());
-
-            Transport.send(message);
-
-            System.out.println("Sent message successfully....");
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
