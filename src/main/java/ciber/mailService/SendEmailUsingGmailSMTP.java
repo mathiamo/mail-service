@@ -24,6 +24,7 @@ import static spark.Spark.*;
 public class SendEmailUsingGmailSMTP {
     private static Logger logger = LoggerFactory.getLogger(SendEmailUsingGmailSMTP.class);
 
+
     public static void main(String[] args) {
         logger.info("Starting Mail API");
 
@@ -47,6 +48,8 @@ public class SendEmailUsingGmailSMTP {
     private static  Mail getMailObjectFromResponse(String json ){
         return new Gson().fromJson(json, Mail.class);
     }
+
+
 
     private static void sendMail(Mail mail) {
         //TODO: add list of users based on interests
