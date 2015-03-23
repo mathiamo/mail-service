@@ -10,12 +10,13 @@
         <graylogHost>${GRAYLOG_HOST}</graylogHost>
         <graylogPort>${GRAYLOG_PORT}</graylogPort>
         <originHost>cibermailservice.herokuapp.com</originHost>
-        <additionalField>application=MyApplication</additionalField>
+        <additionalField>application=ciberMailService</additionalField>
         <additionalField>environment=development</additionalField>
         <facility>gelf-java</facility>
         <extractStacktrace> true</extractStacktrace>
         <threshold>INFO</threshold>
         <addExtendedInformation>true</addExtendedInformation>
+        <mdcIncluded>true</mdcIncluded>
     </appender>
 
     <root>
