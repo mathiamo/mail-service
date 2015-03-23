@@ -6,7 +6,7 @@
         </layout>>
     </appender>
 
-    <appender name="GRAYLOG2" class="com.github.pukkaone.gelf.logback.GelfAppender">
+    <appender name="GRAYLOG2" class="org.graylog2.log.GelfAppender">
         <graylogHost>${GRAYLOG_HOST}</graylogHost>
         <graylogPort>${GRAYLOG_PORT}</graylogPort>
         <originHost>cibermailservice.herokuapp.com</originHost>
@@ -17,7 +17,7 @@
         <addExtendedInformation>true</addExtendedInformation>
     </appender>
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="GRAYLOG2"/>
     </root>

@@ -32,10 +32,7 @@ public class SendEmailUsingGmailSMTP {
         try {
             port(Integer.parseInt(System.getenv("PORT")));
             before((request, response) -> response.type("application/json"));
-            get("/", (request, response) -> {
-                logger.info("Finished starting Mail API");
-                return "hello world";
-            });
+            get("/", (request, response) -> "hello world");
 
             post("/sendMail", (Request request, Response response) -> {
                 String body = request.body();
