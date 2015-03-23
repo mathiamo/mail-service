@@ -1,6 +1,6 @@
 <h1>Mail api</h1>
-<p>Hosted on https://gmailapi.herokuapp.com/</p>
-<p>Can receive json with these parameters on https://gmailapi.herokuapp.com/sendMail:</p>
+<p>Hosted on https://cibermailservice.herokuapp.com</p>
+<p>Can receive json with these parameters on https://cibermailservice.herokuapp.com/sendMail:</p>
 <ul>
   <li>String subject;</li>
   <li>String body;</li>
