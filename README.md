@@ -1,18 +1,21 @@
-# mailApi
+<h1>Mail api</h1>
+<p>Hosted on https://gmailapi.herokuapp.com/</p>
+<p>Can receive json with these parameters on https://gmailapi.herokuapp.com/sendMail:</p>
+<ul>
+  <li>String subject;</li>
+  <li>String body;</li>
+  <li>String[] recievers;</li>
+</ul>
 
-Hosted on https://gmailapi.herokuapp.com/
+<h2>valid json example:</h2>
 
-Can receive json with these parameters on https://gmailapi.herokuapp.com/sendMail:
-  String subject;
-  String body;
-  String[] recievers;
-
-valid json example:
-  {
+<ul>
+  <li><code> {
   "subject":
   "Dine interesser",
   "body":
   "many interesting things",
   "receivers":
   ["abc@mail.com","bca@mail.com"]
-  }
+  }</code></li>
+</ul>
