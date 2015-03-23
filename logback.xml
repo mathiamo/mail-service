@@ -4,6 +4,12 @@
         <graylogHost>${GRAYLOG_HOST}</graylogHost>
         <graylogPort>${GRAYLOG_PORT}</graylogPort>
         <originHost>cibermailservice.herokuapp.com</originHost>
+        <levelIncluded>true</levelIncluded>
+        <locationIncluded>false</locationIncluded>
+        <loggerIncluded>true</loggerIncluded>
+        <markerIncluded>false</markerIncluded>
+        <mdcIncluded>false</mdcIncluded>
+        <threadIncluded>false</threadIncluded>
         <additionalField>application=MyApplication</additionalField>
         <additionalField>environment=development</additionalField>
     </appender>
