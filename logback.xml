@@ -1,27 +1,14 @@
 <configuration>
 
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>%-5level %d %logger{40} {{ '{%X}' }} %msg%n</pattern>
-        </layout>>
-    </appender>
-
-    <appender name="GRAYLOG2" class="org.graylog2.log.GelfAppender">
+    <appender name="GRAYLOG2" class="com.github.pukkaone.gelf.logback.GelfAppender">
         <graylogHost>${GRAYLOG_HOST}</graylogHost>
         <graylogPort>${GRAYLOG_PORT}</graylogPort>
         <originHost>cibermailservice.herokuapp.com</originHost>
-        <additionalField>application=ciberMailService</additionalField>
+        <additionalField>application=MyApplication</additionalField>
         <additionalField>environment=development</additionalField>
-        <facility>gelf-java</facility>
-        <extractStacktrace> true</extractStacktrace>
-        <threshold>INFO</threshold>
-        <addExtendedInformation>true</addExtendedInformation>
-        <mdcIncluded>true</mdcIncluded>
     </appender>
 
-    <root>
-        <priority-value>INFO</priority-value>
-        <appender-ref ref="CONSOLE"/>
+    <root level="DEBUG">
         <appender-ref ref="GRAYLOG2"/>
     </root>
 
