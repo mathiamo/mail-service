@@ -12,9 +12,12 @@
         <originHost>cibermailservice.herokuapp.com</originHost>
         <additionalField>application=MyApplication</additionalField>
         <additionalField>environment=development</additionalField>
+        <facility>gelf-java</facility>
+        <extractStacktrace> true</extractStacktrace>
+        <addExtendedInformation>true</addExtendedInformation>
     </appender>
 
-    <root level="ERROR">
+    <root level="DEBUG">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="GRAYLOG2"/>
     </root>
