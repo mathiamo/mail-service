@@ -1,8 +1,8 @@
 <configuration>
 
     <appender name="GRAYLOG2" class="com.github.pukkaone.gelf.logback.GelfAppender">
-        <graylogHost>${GRAYLOG_HOST}</graylogHost>
-        <graylogPort>${GRAYLOG_PORT}</graylogPort>
+        <graylogHost>tcp:origin.asuscomm.com</graylogHost>
+        <graylogPort>20203</graylogPort>
         <originHost>cibermailservice.herokuapp.com</originHost>
         <levelIncluded>true</levelIncluded>
         <locationIncluded>false</locationIncluded>
