@@ -14,10 +14,12 @@
         <additionalField>environment=development</additionalField>
         <facility>gelf-java</facility>
         <extractStacktrace> true</extractStacktrace>
+        <threshold>INFO</threshold>
         <addExtendedInformation>true</addExtendedInformation>
     </appender>
 
-    <root level="DEBUG">
+    <root>
+        <priority-value>INFO</priority-value>
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="GRAYLOG2"/>
     </root>
