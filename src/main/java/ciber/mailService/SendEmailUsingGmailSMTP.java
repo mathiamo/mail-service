@@ -4,7 +4,9 @@ package ciber.mailService;
  * Created by matmoe on 18.03.2015.
  */
 
+
 import com.google.gson.Gson;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
@@ -23,6 +25,7 @@ import static spark.Spark.*;
 
 public class SendEmailUsingGmailSMTP {
     private static Logger logger = LoggerFactory.getLogger(SendEmailUsingGmailSMTP.class);
+
 
 
     public static void main(String[] args) {
