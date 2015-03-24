@@ -3,7 +3,7 @@
     <appender name="GRAYLOG2" class="com.github.pukkaone.gelf.logback.GelfAppender">
         <graylogHost>tcp:origin.asuscomm.com</graylogHost>
         <graylogPort>20203</graylogPort>
-        <originHost>cibermailservice.herokuapp.com</originHost>
+        <originHost>cibermailservice</originHost>
         <levelIncluded>true</levelIncluded>
         <locationIncluded>false</locationIncluded>
         <loggerIncluded>true</loggerIncluded>
@@ -14,7 +14,7 @@
         <additionalField>environment=development</additionalField>
     </appender>
 
-    <root level="DEBUG">
+    <root level="info">
         <appender-ref ref="GRAYLOG2"/>
     </root>
 
