@@ -8,8 +8,8 @@
     </appender>
 
     <appender name="GRAYLOG2" class="com.github.pukkaone.gelf.logback.GelfAppender">
-        <graylogHost>tcp:${GRAYLOG_HOST}</graylogHost>
-        <graylogPort>${GRAYLOG_PORT}</graylogPort>
+        <graylogHost>tcp:${GRAYLOGHOST}</graylogHost>
+        <graylogPort>${GRAYLOGPORT}</graylogPort>
         <originHost>cibermailservice</originHost>
     </appender>
 
