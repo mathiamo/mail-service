@@ -31,12 +31,16 @@ public class MailService {
 
         try {
             Message message = new MimeMessage(session);
-            String recipients = mail.getReceivers().stream().collect(Collectors.joining(","));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients));
+            String toRecipients = mail.getToRecipients().stream().collect(Collectors.joining(","));
+            String ccRecipients = mail.getCcRecipients().stream().collect(Collectors.joining(","));
+            String bccRecipients = mail.getBccRecipients().stream().collect(Collectors.joining(","));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toRecipients));
+            message.setRecipients(Message.RecipientType.CC, InternetAddress.parse(ccRecipients));
+            message.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(bccRecipients));
             message.setSubject(mail.getSubject());
             message.setText(mail.getBody());
             Transport.send(message);
-            logger.info(String.format("Sent mail with \"subject\" %s to recipients: \"%s\"", mail.getSubject(), recipients));
+            logger.info(String.format("Sent mail with \"subject\" %s to recipients: \"%s\"", mail.getSubject(), toRecipients));
         }
         catch (MessagingException e) {
             throw new RuntimeException(e);

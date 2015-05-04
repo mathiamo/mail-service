@@ -9,20 +9,37 @@ public class Mail {
 
     String subject;
     String body;
-    ArrayList<String> receivers = new ArrayList<>();
+    ArrayList<String> toRecipients = new ArrayList<>();
+    ArrayList<String> ccRecipients = new ArrayList<>();
+    ArrayList<String> bccRecipients = new ArrayList<>();
 
-    public Mail(String subject, String body, ArrayList<String>receivers) {
+    public Mail() {}
+
+    public Mail(String subject, String body, ArrayList<String> toRecipients, ArrayList<String> ccRecipients, ArrayList<String> bccRecipients) {
         this.body=body;
         this.subject=subject;
-        this.receivers=receivers;
+        this.toRecipients=toRecipients;
+        this.ccRecipients=ccRecipients;
+        this.bccRecipients=bccRecipients;
     }
+
     public String getSubject() {
         return subject;
     }
-    public ArrayList<String> getReceivers() {
-        return receivers;
-    }
+
     public String getBody() {
         return body;
+    }
+
+    public ArrayList<String> getToRecipients() {
+        return toRecipients;
+    }
+
+    public ArrayList<String> getCcRecipients() {
+        return ccRecipients;
+    }
+
+    public ArrayList<String> getBccRecipients() {
+        return bccRecipients;
     }
 }
