@@ -8,6 +8,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * Created by bjerke.
@@ -26,25 +27,27 @@ public class MailService {
         props.put("mail.smtp.port", "465");
 
         // Get the Session object.
-        Session session = Session.getInstance(props,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(System.getenv("SMTP_USERNAME"), System.getenv("SMTP_PASSWORD"));
-                    }
-                });
+        Session session = Session.getInstance(props, getAuthenticator());
 
         try {
             Message message = new MimeMessage(session);
-
-            for (String recipient : mail.getReceivers()) {
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
-                message.setSubject(mail.getSubject());
-                message.setText(mail.getBody());
-                Transport.send(message);
-                logger.info(String.format("Sent mail with subject %s to recipient: %s", mail.getSubject(), recipient));
-            }
-        } catch (MessagingException e) {
+            String recipients = mail.getReceivers().stream().collect(Collectors.joining(","));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients));
+            message.setSubject(mail.getSubject());
+            message.setText(mail.getBody());
+            Transport.send(message);
+            logger.info(String.format("Sent mail with \"subject\" %s to recipients: \"%s\"", mail.getSubject(), recipients));
+        }
+        catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private Authenticator getAuthenticator() {
+        return new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(System.getenv("SMTP_USERNAME"), System.getenv("SMTP_PASSWORD"));
+            }
+        };
     }
 }
