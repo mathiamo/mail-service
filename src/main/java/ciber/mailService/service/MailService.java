@@ -12,13 +12,9 @@ import java.util.Properties;
  */
 public class MailService {
     public void sendMail(Mail mail){
-        //TODO: add list of users based on interests
-
         String from = "Asdf@asdf.com";//change accordingly
         final String username = "ciberjavadevelopment@gmail.com";//change accordingly
         final String password = "development123";//change accordingly
-
-        String host = "smtp.gmail.com";
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
