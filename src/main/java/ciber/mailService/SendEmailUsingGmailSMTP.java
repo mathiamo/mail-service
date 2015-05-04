@@ -4,6 +4,7 @@ package ciber.mailService;
  * Created by matmoe on 18.03.2015.
  */
 
+import ciber.mailService.dto.Mail;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

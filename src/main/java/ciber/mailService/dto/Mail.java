@@ -1,4 +1,4 @@
-package ciber.mailService;
+package ciber.mailService.dto;
 
 import java.util.ArrayList;
 
