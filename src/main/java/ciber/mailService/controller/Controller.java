@@ -1,6 +1,5 @@
 package ciber.mailService.controller;
 
-import ciber.mailService.dto.Mail;
 import ciber.mailService.service.MailService;
 import ciber.mailService.util.ConversionUtil;
 import spark.Request;
@@ -17,9 +16,8 @@ public class Controller {
     }
 
     public String sendMail(Request request, Response response) {
-        String body = request.body();
-        Mail mail = ConversionUtil.convertJsonToMail(body);
-        mailService.sendMail(mail);
+        mailService.sendMail(ConversionUtil.convertJsonToMail(request.body()));
+        response.status(200);
         return "{\"status\": \"success\"}";
     }
 }
