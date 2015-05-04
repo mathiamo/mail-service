@@ -16,8 +16,14 @@ public class Controller {
     }
 
     public String sendMail(Request request, Response response) {
-        mailService.sendMail(ConversionUtil.convertJsonToMail(request.body()));
-        response.status(200);
-        return "{\"status\": \"success\"}";
+        try{
+            mailService.sendMail(ConversionUtil.convertJsonToMail(request.body()));
+            response.status(200);
+            return "{\"status\": \"success\"}";
+        }
+        catch(Exception e) {
+            response.status(500);
+            return "{\"error\": \""+ e.getMessage() +"\"}";
+        }
     }
 }
