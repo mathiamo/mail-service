@@ -1,6 +1,8 @@
 package ciber.mailService.service;
 
 import ciber.mailService.dto.Mail;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -11,10 +13,10 @@ import java.util.Properties;
  * Created by bjerke.
  */
 public class MailService {
+
+    private static Logger logger = LoggerFactory.getLogger(MailService.class);
+
     public void sendMail(Mail mail){
-        String from = "Asdf@asdf.com";//change accordingly
-        final String username = "ciberjavadevelopment@gmail.com";//change accordingly
-        final String password = "development123";//change accordingly
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -27,21 +29,19 @@ public class MailService {
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
+                        return new PasswordAuthentication(System.getenv("SMTP_USERNAME"), System.getenv("SMTP_PASSWORD"));
                     }
                 });
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(from));
 
-            for (String s : mail.getReceivers()) {
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(s));
+            for (String recipient : mail.getReceivers()) {
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
                 message.setSubject(mail.getSubject());
                 message.setText(mail.getBody());
-
                 Transport.send(message);
-                System.out.println("Sent message successfully....");
+                logger.info(String.format("Sent mail with subject %s to recipient: %s", mail.getSubject(), recipient));
             }
         } catch (MessagingException e) {
             throw new RuntimeException(e);
