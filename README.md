@@ -12,9 +12,16 @@
 ```json
   {
   	"subject": "Dine interesser",
-  	"body": "many interesting things",
-  	"toRecipients": ["asd@asd.asd, test@testerson.com"],
-  	"ccRecipients": ["do_you@even.lift"],
-  	"bccRecipients": ["secret@copy.com"],
+    	"body": "many interesting things",
+    	"toRecipients": ["asd@asd.asd, test@testerson.com"],
+    	"ccRecipients": ["do_you@even.lift"],
+    	"bccRecipients": ["secret@copy.com"],
+  	"attachments": [
+  		{
+  			"filename": "nameOfFileHere",
+  			"mimeType": "mimeTypeOfFileHere",
+  			"encodedFile": "base64EncodedFileHere"
+  		}
+  	]
   }
 ```

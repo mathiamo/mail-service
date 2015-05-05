@@ -12,15 +12,17 @@ public class Mail {
     ArrayList<String> toRecipients = new ArrayList<>();
     ArrayList<String> ccRecipients = new ArrayList<>();
     ArrayList<String> bccRecipients = new ArrayList<>();
+    ArrayList<Attachment> attachments = new ArrayList<>();
 
     public Mail() {}
 
-    public Mail(String subject, String body, ArrayList<String> toRecipients, ArrayList<String> ccRecipients, ArrayList<String> bccRecipients) {
+    public Mail(String subject, String body, ArrayList<String> toRecipients, ArrayList<String> ccRecipients, ArrayList<String> bccRecipients, ArrayList<Attachment> attachments) {
         this.body=body;
         this.subject=subject;
         this.toRecipients=toRecipients;
         this.ccRecipients=ccRecipients;
         this.bccRecipients=bccRecipients;
+        this.attachments=attachments;
     }
 
     public String getSubject() {
@@ -41,5 +43,9 @@ public class Mail {
 
     public ArrayList<String> getBccRecipients() {
         return bccRecipients;
+    }
+
+    public ArrayList<Attachment> getAttachments() {
+        return attachments;
     }
 }

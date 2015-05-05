@@ -4,9 +4,15 @@ import ciber.mailService.dto.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.util.ByteArrayDataSource;
+import java.util.Base64;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
@@ -39,12 +45,34 @@ public class MailService {
             message.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(bccRecipients));
             message.setSubject(mail.getSubject());
             message.setText(mail.getBody());
+            addAttachments(message, mail);
             Transport.send(message);
             logger.info(String.format("Sent mail with \"subject\" %s to recipients: \"%s\"", mail.getSubject(), toRecipients));
         }
         catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void addAttachments(Message message, Mail mail) throws MessagingException {
+
+        Multipart multipart = new MimeMultipart();
+
+        mail.getAttachments().stream().forEach(attachment -> {
+            byte[] data = Base64.getDecoder().decode(attachment.getEncodedFile());
+            MimeBodyPart messageBodyPart = new MimeBodyPart();
+            String fileName = attachment.getFilename();
+            DataSource source = new ByteArrayDataSource(data, attachment.getMimeType());
+            try{
+                messageBodyPart.setDataHandler(new DataHandler(source));
+                messageBodyPart.setFileName(fileName);
+                multipart.addBodyPart(messageBodyPart);
+            }
+            catch(Exception e){
+                logger.error("Something went wrong during conversion from base64 to message");
+            }
+        });
+        message.setContent(multipart);
     }
 
     private Authenticator getAuthenticator() {
