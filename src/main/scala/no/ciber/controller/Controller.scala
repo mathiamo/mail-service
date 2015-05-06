@@ -1,8 +1,9 @@
 package no.ciber.controller
 
+import no.ciber.dto.{ApiInfo, Endpoint}
 import no.ciber.service.MailService
 import no.ciber.util.ConversionUtil
-import spark.{Route, Response, Request}
+import spark.{Request, Response, Route}
 
 /**
  * Created by bjerke.
@@ -31,19 +32,10 @@ object Controller {
     def index: Route = {
         new Route {
             override def handle(request: Request, response: Response): AnyRef = {
-                s"""
-                   |{
-                   |  "api-name": "mail-service",
-                   |  "endpoints": [
-                   |      {
-                   |           "name": "sendMail",
-                   |           "endpoint": "/sendMail",
-                   |           "method": "POST",
-                   |           "description": "Accepts a json payload with a mail object and uses an SMTP server to send it"
-                   |      }
-                   |  ]
-                   |}
-                """.stripMargin
+                val sendMailEndpoint = new Endpoint("sendMail", "/sendMail", "POST", "Accepts a json payload with a mail object and uses an SMTP server to send it")
+                val endpoints = List(sendMailEndpoint)
+                val api = new ApiInfo("mail-service", endpoints)
+                api.toJson
             }
         }
     }
